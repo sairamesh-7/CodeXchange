@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+   THEME VARIABLES
+ */
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 6%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 6%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 224 76% 48%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 224 76% 48%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224 76% 48%;
+
+    --radius: 0.6rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+  }
+}
+
+/* 
+   BASE STYLES (NO BORDERS)
+ */
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* 
+   CUSTOM UI STYLES
+*/
+
+.gradient-button-bg {
+  background: radial-gradient(circle at top, #818cf8, #3730a3);
+}
+
+.gradient-button {
+  background: radial-gradient(circle at bottom, #312e81 0%, #020617 100%);
+}
+
+.gradient-button-bg > div:hover {
+  background: radial-gradient(circle at bottom, #312e81 0%, #020617 120%);
+}
+
+.gradient-project-card-bg {
+  background: radial-gradient(circle at bottom right, #818cf8 -15%, #3730a3 25%, #020617 55%);
+}
+
+.gradient-project-card {
+  background: radial-gradient(circle at bottom right, #312e81 -40%, #020617 55%);
+}
+
+.gradient-project-card-bg > div:hover {
+  background: radial-gradient(circle at bottom right, #312e81 -40%, #020617 65%);
+}
+
+/* 
+   DECORATIONS
+*/
+
+.inline-decoration::after {
+  content: "Generate G";
+  color: #a1a1aa;
+  border: 1px solid #3f3f46;
+  padding: 2px 6px;
+  border-radius: 6px;
+  margin-left: 12px;
+  font-size: 12px;
+}
+
+/* 
+   COLLAB CURSOR
+ */
+
+.yRemoteSelection {
+  opacity: 0.4;
+  background-color: var(--user-color);
+}
+
+.yRemoteSelectionHead {
+  position: absolute;
+  height: 100%;
+  border-left: 2px solid var(--user-color);
+}
+
+.yRemoteSelectionHead::after {
+  position: absolute;
+  top: -1.4rem;
+  left: -2px;
+  padding: 2px 6px;
+  background: var(--user-color);
+  color: white;
+  border-radius: 6px;
+  border-bottom-left-radius: 0;
+  font-size: 13px;
+  font-weight: 600;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/*
+   HIDE SCROLLBAR
+ */
+
+.tab-scroll::-webkit-scrollbar {
+  display: none;
+}
