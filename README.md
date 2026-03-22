@@ -8,7 +8,7 @@
 ![Clerk](https://img.shields.io/badge/Clerk-Auth-6C47FF?style=for-the-badge&logo=clerk&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-**Scalable Cloud Infrastructure for Remote Collaborative Programming Environments**
+**Serverless Cloud IDE for Real-Time Collaboration Using Docker**
 
 A cloud-based collaborative programming platform that allows multiple users to write, edit, run, and share code in real time — directly from the browser, with no local setup required.
 
