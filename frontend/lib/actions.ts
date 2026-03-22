@@ -99,11 +99,11 @@ export async function unshareVirtualbox(virtualboxId: string, userId: string) {
 
 export async function generateCode(code: string, line: number) {
   const res = await fetch(
-    "https://api.cloudflare.com/client/v4/accounts/dbcc31144a91550582475baf9bb01af1/ai/run/@cf/meta/llama-3-8b-instruct",
+    "https://api.cloudflare.com/client/v4/accounts/YOUR_API_KEY/ai/run/@cf/meta/llama-3-8b-instruct",
     {
       method: "POST",
       headers: {
-        Authorization: "Bearer 0_N7YSPsYKCzQwjngSADN11d3eq1gUCIw9EMmna1",
+        Authorization: "Bearer YOUR_API_KEY",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
