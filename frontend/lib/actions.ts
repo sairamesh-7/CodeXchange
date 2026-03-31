@@ -4,60 +4,93 @@ import { revalidatePath } from "next/cache";
 import {
   CreateServiceCommand,
   DescribeServicesCommand,
-  ECSClient,
 } from "@aws-sdk/client-ecs";
 import ecsClient from "./ecs";
 
+// =======================
+// CREATE VIRTUALBOX
+// =======================
 export async function createVirtualbox(body: {
   type: string;
   name: string;
   visibility: string;
 }) {
-  const res = await fetch(
-    "https://database.sairamesh-pragada.workers.dev/api/virtualbox",
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    }
-  );
+  try {
+    const res = await fetch(
+      "https://database.sairamesh-pragada.workers.dev/api/virtualbox",
+      {
+        method: "PUT", // change to POST if needed
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
 
-  return await res.text();
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("API Error:", errorText);
+      throw new Error(errorText);
+    }
+
+    return await res.text();
+  } catch (error) {
+    console.error("Fetch failed:", error);
+    throw new Error("Failed to create Virtualbox");
+  }
 }
 
+// =======================
+// DELETE VIRTUALBOX
+// =======================
 export async function deleteVirtualbox(id: string) {
-  const res = await fetch(
-    `https://database.sairamesh-pragada.workers.dev/api/virtualbox?id=${id}`,
-    {
-      method: "DELETE",
-    }
-  );
+  try {
+    await fetch(
+      `https://database.sairamesh-pragada.workers.dev/api/virtualbox?id=${id}`,
+      {
+        method: "DELETE",
+      }
+    );
 
-  revalidatePath("/dashboard");
+    revalidatePath("/dashboard");
+  } catch (error) {
+    console.error("Delete failed:", error);
+  }
 }
 
+// =======================
+// UPDATE VIRTUALBOX
+// =======================
 export async function updateVirtualbox(body: {
   id: string;
   name?: string;
   visibility?: "public" | "private";
 }) {
-  const res = await fetch(
-    "https://database.sairamesh-pragada.workers.dev/api/virtualbox",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    }
-  );
+  try {
+    await fetch(
+      "https://database.sairamesh-pragada.workers.dev/api/virtualbox",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
 
-  revalidatePath("/dashboard");
+    revalidatePath("/dashboard");
+  } catch (error) {
+    console.error("Update failed:", error);
+  }
 }
 
-export async function shareVirtualbox(virtualboxId: string, email: string) {
+// =======================
+// SHARE VIRTUALBOX
+// =======================
+export async function shareVirtualbox(
+  virtualboxId: string,
+  email: string
+) {
   try {
     const res = await fetch(
       "https://database.sairamesh-pragada.workers.dev/api/virtualbox/share",
@@ -69,63 +102,88 @@ export async function shareVirtualbox(virtualboxId: string, email: string) {
         body: JSON.stringify({ virtualboxId, email }),
       }
     );
+
     const text = await res.text();
 
-    if (res.status !== 200) {
+    if (!res.ok) {
       return { success: false, message: text };
     }
 
     revalidatePath(`/code/${virtualboxId}`);
     return { success: true, message: "Shared successfully" };
   } catch (err) {
-    return { success: false, message: err };
+    console.error("Share failed:", err);
+    return { success: false, message: "Error sharing" };
   }
 }
 
-export async function unshareVirtualbox(virtualboxId: string, userId: string) {
-  const res = await fetch(
-    "https://database.sairamesh-pragada.workers.dev/api/virtualbox/share",
-    {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ virtualboxId, userId }),
-    }
-  );
+// =======================
+// UNSHARE VIRTUALBOX
+// =======================
+export async function unshareVirtualbox(
+  virtualboxId: string,
+  userId: string
+) {
+  try {
+    await fetch(
+      "https://database.sairamesh-pragada.workers.dev/api/virtualbox/share",
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ virtualboxId, userId }),
+      }
+    );
 
-  revalidatePath(`/code/${virtualboxId}`);
+    revalidatePath(`/code/${virtualboxId}`);
+  } catch (error) {
+    console.error("Unshare failed:", error);
+  }
 }
 
+// =======================
+// GENERATE CODE (AI)
+// =======================
 export async function generateCode(code: string, line: number) {
-  const res = await fetch(
-    "https://api.cloudflare.com/client/v4/accounts/dbcc31144a91550582475baf9bb01af1/ai/run/@cf/meta/llama-3-8b-instruct",
-    {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer 0_N7YSPsYKCzQwjngSADN11d3eq1gUCIw9EMmna1",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        messages: [
-          {
-            role: "system",
-            content:
-              "You are an expert coding assistant who reads from an existing code file, and suggests code to add to the file.",
-          },
-          {
-            role: "user",
-            content: "",
-          },
-        ],
-      }),
-    }
-  );
+  try {
+    const res = await fetch(
+      "https://api.cloudflare.com/client/v4/accounts/dbcc31144a91550582475baf9bb01af1/ai/run/@cf/meta/llama-3-8b-instruct",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${process.env.CLOUDFLARE_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: [
+            {
+              role: "system",
+              content:
+                "You are an expert coding assistant who reads from an existing code file and suggests improvements.",
+            },
+            {
+              role: "user",
+              content: code,
+            },
+          ],
+        }),
+      }
+    );
+
+    return await res.json();
+  } catch (error) {
+    console.error("AI generation failed:", error);
+  }
 }
 
+// =======================
+// START SERVER (AWS ECS)
+// =======================
 export async function startServer(serviceName: string) {
   const command = new CreateServiceCommand({
-    cluster: "arn:aws:ecs:us-east-1:654654208427:cluster/virtualboxccce",
+    cluster:
+      "arn:aws:ecs:us-east-1:654654208427:cluster/virtualboxccce",
     serviceName,
     taskDefinition: "cccetasks",
     desiredCount: 1,
@@ -147,26 +205,30 @@ export async function startServer(serviceName: string) {
 
   try {
     const response = await ecsClient.send(command);
-    console.log("started server", response.service?.serviceName);
+    console.log("Server started:", response.service?.serviceName);
   } catch (err) {
     console.error("Error starting server:", err);
   }
 }
 
-const checkServiceStatus = (serviceName: string) => {
+// =======================
+// CHECK SERVICE STATUS
+// =======================
+export const checkServiceStatus = (serviceName: string) => {
   return new Promise((resolve, reject) => {
     const command = new DescribeServicesCommand({
-      cluster: "arn:aws:ecs:us-east-1:654654208427:cluster/virtualboxccce",
+      cluster:
+        "arn:aws:ecs:us-east-1:654654208427:cluster/virtualboxccce",
       services: [serviceName],
     });
 
     const interval = setInterval(async () => {
       try {
         const response = await ecsClient.send(command);
-        console.log("Checking service status", response);
 
         if (response.services && response.services.length > 0) {
-          const service = response.services?.[0];
+          const service = response.services[0];
+
           if (
             service.runningCount === service.desiredCount &&
             service.deployments &&

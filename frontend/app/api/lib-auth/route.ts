@@ -5,8 +5,7 @@ import { Liveblocks } from "@liveblocks/node";
 import { NextRequest } from "next/server";
 
 const liveblocks = new Liveblocks({
-  secret:
-    "sk_dev_pXo5RpPLCL2Cd6f5bzmWBhGNyfRtWM2P2tz0DmeeWP-hAGR6fo35Z7vgPVrgI-MK",
+  secret: process.env.LIVEBLOCKS_SECRET_KEY!,
 });
 
 export async function POST(request: NextRequest) {
@@ -25,7 +24,6 @@ export async function POST(request: NextRequest) {
   const randomColor = colorNames[
     Math.floor(Math.random() * colorNames.length)
   ] as keyof typeof colors;
-  const code = colors[randomColor];
 
   const session = liveblocks.prepareSession(user.id, {
     userInfo: {
@@ -39,6 +37,7 @@ export async function POST(request: NextRequest) {
   user.virtualbox.forEach((virtualbox) => {
     session.allow(`${virtualbox.id}`, session.FULL_ACCESS);
   });
+
   user.usersToVirtualboxes.forEach((userToVirtualbox) => {
     session.allow(`${userToVirtualbox.virtualboxId}`, session.FULL_ACCESS);
   });
