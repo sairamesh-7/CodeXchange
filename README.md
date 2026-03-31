@@ -1,4 +1,4 @@
-# 🚀 Serverless Cloud IDE with Real-Time Collaboration  
+# 🚀 Serverless Cloud IDE with Real-Time Collaboration
 
 <div align="center">
 
@@ -14,144 +14,121 @@
 
 ---
 
-## ✨ Overview  
+## ✨ Overview
 
-A **next-generation cloud-based IDE** that enables developers to **write, execute, and collaborate on code in real-time** — directly from the browser.  
+A **next-generation cloud-based IDE** that enables developers to **write, execute, and collaborate on code in real-time** — directly from the browser.
 
-No setup. No dependencies. Just code. ⚡  
+No setup. No dependencies. Just code. ⚡
 
 > Built with **serverless architecture + Docker isolation + real-time sync**, making it scalable, secure, and collaboration-friendly.
 
 ---
 
-## 🌟 Key Highlights  
+## 🌟 Key Highlights
 
-- ⚡ **Zero Setup Development** – Start coding instantly  
-- 🤝 **Real-Time Collaboration** – Multiple users, same code, live updates  
-- 🐳 **Docker Execution Engine** – Secure sandboxed environments  
-- 🤖 **AI Code Assistance** – Smart suggestions & auto-completion  
-- ☁️ **Serverless Scalability** – Handles traffic automatically  
-- 📂 **Cloud Storage (R2 + D1)** – Persistent and reliable  
-- 🖥️ **Live Preview & Terminal** – Full coding experience in browser  
+| Feature | Description |
+|---|---|
+| ⚡ **Zero Setup Development** | Start coding instantly, no local install needed |
+| 🤝 **Real-Time Collaboration** | Multiple users, same code, live updates |
+| 🐳 **Docker Execution Engine** | Secure sandboxed environments per user |
+| 🤖 **AI Code Assistance** | Smart suggestions & auto-completion |
+| ☁️ **Serverless Scalability** | Handles traffic spikes automatically |
+| 📂 **Cloud Storage (R2 + D1)** | Persistent, reliable file & data storage |
+| 🖥️ **Live Preview & Terminal** | Full coding experience in the browser |
 
 ---
 
-## 🧠 Architecture (High-Level)
+## 🧠 Architecture
 
 ```text
-User → Frontend (Next.js)
-     → WebSocket Server (Real-time sync)
-     → Serverless APIs
-     → Docker Containers (Code Execution)
-     → Cloudflare D1 (Database)
-     → Cloudflare R2 (Storage)
-🛠️ Tech Stack
-Category	Technologies
-🎨 Frontend	Next.js, React, Tailwind CSS
-⚙️ Backend	Node.js, WebSockets
-🐳 Execution	Docker Containers
-☁️ Cloud	Cloudflare Workers, D1, R2
-🤖 AI	External AI APIs
-🗄️ Database	Drizzle ORM + D1
-📂 Project Structure
+User
+ └── Frontend (Next.js)
+      ├── WebSocket Server      → Real-time collaboration sync
+      ├── Serverless APIs       → Business logic (Cloudflare Workers)
+      ├── Docker Containers     → Isolated code execution
+      ├── Cloudflare D1         → Relational database (via Drizzle ORM)
+      └── Cloudflare R2         → File & asset storage
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technologies |
+|---|---|
+| 🎨 Frontend | Next.js, React, Tailwind CSS |
+| ⚙️ Backend | Node.js, WebSockets |
+| 🐳 Execution | Docker Containers |
+| ☁️ Cloud | Cloudflare Workers, D1, R2 |
+| 🤖 AI | External AI APIs |
+| 🗄️ Database | Drizzle ORM + Cloudflare D1 |
+
+---
+
+## 📂 Project Structure
+
+```
+Serverless-Cloud-IDE/
 ├── backend/
 │   ├── server/
-│   │   ├── .dockerignore
-│   │   ├── .gitignore
-│   │   ├── nodemon.json
 │   │   ├── dockerfile
+│   │   ├── nodemon.json
 │   │   ├── src/
-│   │   │   ├── inactivity.ts
-│   │   │   └── ratelimit.ts
+│   │   │   ├── inactivity.ts       # Auto-shutdown idle containers
+│   │   │   └── ratelimit.ts        # API rate limiting logic
 │   │   └── package.json
 │   ├── database/
-│   │   ├── drizzle/
-│   │   │   ├── 0001_cool_solo.sql
-│   │   │   ├── 0002_dizzy_mad_thinker.sql
-│   │   │   ├── 0006_brown_senator_kelly.sql
-│   │   │   ├── 0005_demonic_sheva_callister.sql
-│   │   │   ├── 0003_curious_ego.sql
-│   │   │   ├── 0004_bitter_overlord.sql
-│   │   │   └── 0000_daffy_medusa.sql
-│   │   ├── .prettierrc
-│   │   ├── worker-configuration.d.ts
-│   │   ├── .editorconfig
-│   │   ├── test/
-│   │   │   └── tsconfig.json
+│   │   ├── drizzle/                # SQL migration files
 │   │   ├── drizzle.config.ts
 │   │   ├── vitest.config.ts
 │   │   └── wrangler.toml
-│   ├── package.json
 │   └── storage/
-│       ├── .prettierrc
-│       ├── worker-configuration.d.ts
-│       ├── .editorconfig
-│       ├── test/
-│       │   └── tsconfig.json
-│       ├── wrangler.toml
-│       ├── vitest.config.ts
+│       ├── wrangler.toml           # Cloudflare R2 config
 │       └── package.json
 └── frontend/
-    ├── .eslintrc.json
     ├── app/
-    │   ├── favicon.ico
     │   ├── (app)/
-    │   │   ├── code/
-    │   │   │   └── page.tsx
+    │   │   ├── code/page.tsx       # Main IDE page
     │   │   └── layout.tsx
     │   └── (auth)/
-    │       ├── layout.tsx
-    │       ├── sign-in/
-    │       │   └── [[...sign-in]]/
-    │       │       └── page.tsx
-    │       └── sign-up/
-    │           └── [[...sign-up]]/
-    │               └── page.tsx
-    ├── next.config.mjs
-    ├── postcss.config.js
-    ├── public/
-    │   ├── icons/
-    │   ├── project-icons/
-    │   │   └── more.svg
-    │   └── vercel.svg
-    ├── postcss.config.mjs
-    ├── lib/
-    │   ├── ecs.ts
-    │   ├── types.ts
-    │   └── colors.ts
+    │       ├── sign-in/            # Clerk sign-in route
+    │       └── sign-up/            # Clerk sign-up route
     ├── components/
     │   ├── editor/
-    │   │   ├── sidebar/
-    │   │   │   └── types.ts
-    │   │   └── live/
-    │   │       └── room.tsx
-    │   ├── layout/
-    │   │   └── themeProvider.tsx
-    │   ├── ui/
-    │   │   ├── avatar.tsx
-    │   │   ├── label.tsx
-    │   │   ├── input.tsx
-    │   │   └── sonner.tsx
-    │   └── dashboard/
-    │       ├── projectCard/
-    │       │   └── index.tsx
-    │       └── about.tsx
-    ├── components.json
-    ├── middleware.ts
-    ├── .gitignore
-    └── tsconfig.json
-⚙️ Installation
-🔧 Prerequisites
-Node.js (v18+)
-Docker
-Cloudflare Wrangler CLI
-🚀 Setup
-# Clone repository
+    │   │   ├── sidebar/            # File explorer sidebar
+    │   │   └── live/room.tsx       # LiveBlocks collaboration room
+    │   ├── ui/                     # Reusable UI components
+    │   └── dashboard/              # Dashboard & project cards
+    ├── lib/
+    │   ├── types.ts
+    │   ├── ecs.ts
+    │   └── colors.ts
+    └── middleware.ts               # Auth middleware
+```
+
+---
+
+## ⚙️ Installation
+
+### 🔧 Prerequisites
+
+- [Node.js](https://nodejs.org/) v18+
+- [Docker](https://www.docker.com/)
+- [Cloudflare Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/)
+
+### 🚀 Setup
+
+```bash
+# Clone the repository
 git clone https://github.com/sairamesh-7/Serverless-Cloud-IDE.git
 
-# Navigate into project
+# Navigate into the project
 cd Serverless-Cloud-IDE
-📦 Install Dependencies
+```
+
+### 📦 Install Dependencies
+
+```bash
 # Install frontend dependencies
 cd frontend
 npm install
@@ -159,52 +136,86 @@ npm install
 # Install backend dependencies
 cd ../backend/server
 npm install
-▶️ Run Locally
-# Start backend
-cd backend/server
+```
+
+### ▶️ Run Locally
+
+```bash
+# Start backend (in backend/server)
 npm run dev
 
-# Start frontend
-cd frontend
+# Start frontend (in frontend)
 npm run dev
+```
 
-🌐 Open your browser and go to:
-http://localhost:3000
+🌐 Open your browser at: **http://localhost:3000**
 
-🔄 Workflow
-1. Login 🔐
-2. Create Project 📁
-3. Write Code ✍️
-4. Collaborate 🤝
-5. AI Suggestions 🤖
-6. Run Code 🐳
-7. Save to Cloud ☁️
-📸 Screenshots (Add Your Images Here)
-![Editor](./screenshots/editor.png)
-![Dashboard](./screenshots/dashboard.png)
-![Collaboration](./screenshots/collab.png)
-🚧 Future Enhancements
-🔄 GitHub Integration (Version Control)
-🌐 Multi-language Support
-⚡ Performance Optimization
-🧪 Built-in Testing Pipelines
-🧠 Advanced AI Models
-📊 Better Resource Scaling
-👨‍💻 Authors
+---
 
-Pragada Sai Ramesh
-Mannam Arjun
+## 🔄 Workflow
 
-🎓 SRM Institute of Science and Technology
+```
+1. 🔐 Login          →  Authenticate via Clerk
+2. 📁 Create Project →  Choose language & template
+3. ✍️ Write Code     →  Full-featured browser editor
+4. 🤝 Collaborate    →  Invite teammates, code together live
+5. 🤖 AI Suggestions →  Get intelligent code completions
+6. 🐳 Run Code       →  Execute in isolated Docker containers
+7. ☁️ Save to Cloud  →  Persist files to Cloudflare R2
+```
 
-📜 License
+---
 
-MIT License © 2026 sairamesh-7
+## 📸 Screenshots
+
+> _Add your screenshots to the `/screenshots` folder and they will appear here._
+
+| Editor | Dashboard | Collaboration |
+|--------|-----------|---------------|
+| ![Editor](./screenshots/editor.png) | ![Dashboard](./screenshots/dashboard.png) | ![Collaboration](./screenshots/collab.png) |
+
+---
+
+## 🚧 Roadmap
+
+- [ ] 🔄 GitHub Integration (Version Control)
+- [ ] 🌐 Multi-language Support Expansion
+- [ ] ⚡ Performance Optimization
+- [ ] 🧪 Built-in Testing Pipelines
+- [ ] 🧠 Advanced AI Model Integration
+- [ ] 📊 Better Resource Autoscaling
+
+---
+
+## 👨‍💻 Authors
 
 <div align="center">
-🌍 Built for Developers, by Developers
 
-⭐ Star this repo if you like it
-🚀 Contributions are welcome!
+| Name | Role |
+|------|------|
+| **Pragada Sai Ramesh** | Developer |
+| **Mannam Arjun** | Developer |
 
-</div> ```
+🎓 *SRM Institute of Science and Technology*
+
+</div>
+
+---
+
+## 📜 License
+
+```
+MIT License © 2026 sairamesh-7
+```
+
+See [LICENSE](./LICENSE) for full details.
+
+---
+
+<div align="center">
+
+🌍 **Built for Developers, by Developers**
+
+⭐ Star this repo if you like it &nbsp;|&nbsp; 🚀 Contributions are welcome!
+
+</div>
