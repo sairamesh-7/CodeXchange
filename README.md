@@ -156,7 +156,6 @@ Step 7 → Cloud Storage: Save files directly to persisted cloud object storage.
 [ ] Refine resource allocation approaches for container instantiation under heavy loads.
 
 👨‍💻 Authors
-Dr. N. Senthamarai
 Pragada Sai Ramesh
 Mannam Arjun
 Dept of Networking And Communications, SRM Institute of Science and Technology, Kattankulathur, India
