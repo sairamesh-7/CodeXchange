@@ -175,8 +175,16 @@ npm run dev
 | ![System Architecture of the Cloud IDE Platform](./ScreenShots/systemArch.png) | ![Data Flow Diagram of Serverless Cloud IDE with Real-Time Collaboration](./ScreenShots/Dataflow.png) | ![Code editor with live preview and terminal](./ScreenShots/editor.png) |
 
 ---
-
-## 🚧 Roadmap
+✅What We Completed
+✔ User authentication and session management
+✔ Project creation and management
+✔ Browser-based code editor
+✔ Real-time collaboration (multi-user editing)
+✔ Docker-based code execution (Node.js)
+✔ Cloud storage integration
+✔ Serverless backend integration
+---
+## 🚧What We Would Add With More Time
 
 - [ ] 🔄 GitHub Integration (Version Control)
 - [ ] 🌐 Multi-language Support Expansion
@@ -184,7 +192,6 @@ npm run dev
 - [ ] 🧪 Built-in Testing Pipelines
 - [ ] 🧠 Advanced AI Model Integration
 - [ ] 📊 Better Resource Autoscaling
-
 ---
 
 ## 👨‍💻 Authors
