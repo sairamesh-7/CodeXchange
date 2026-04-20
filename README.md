@@ -170,9 +170,9 @@ npm run dev
 
 > _Add your screenshots to the `/screenshots` folder and they will appear here._
 
-| Editor | Dashboard | Collaboration |
+| System Architecture of the Cloud IDE Platform | Data Flow Diagram of Serverless Cloud IDE with Real-Time Collaboration | Code editor with live preview and terminal |
 |--------|-----------|---------------|
-| ![Editor](./image.png) | ![Dashboard](./screenshots/dashboard.png) | ![Collaboration](./screenshots/collab.png) |
+| ![System Architecture of the Cloud IDE Platform](./ScreenShots/systemArch.png) | ![Data Flow Diagram of Serverless Cloud IDE with Real-Time Collaboration](./ScreenShots/Dataflow.png) | ![Code editor with live preview and terminal](./ScreenShots/editor.png) |
 
 ---
 
