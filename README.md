@@ -194,7 +194,6 @@ npm run dev
 | Name | Role |
 |------|------|
 | **Pragada Sai Ramesh** | Developer |
-| **Mannam Arjun** | Developer |
 
 🎓 *SRM Institute of Science and Technology*
 
