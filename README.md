@@ -68,7 +68,7 @@ User
 ## 📂 Project Structure
 
 ```
-Serverless-Cloud-IDE/
+CodeXchange/
 ├── backend/
 │   ├── server/
 │   │   ├── dockerfile
@@ -123,7 +123,7 @@ Serverless-Cloud-IDE/
 git clone https://github.com/sairamesh-7/Serverless-Cloud-IDE.git
 
 # Navigate into the project
-cd Serverless-Cloud-IDE
+cd CodeXchange
 ```
 
 ### 📦 Install Dependencies
