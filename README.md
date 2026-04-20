@@ -26,15 +26,15 @@ No setup. No dependencies. Just code. ⚡
 
 ## 🌟 Key Highlights
 
-| Feature | Description |
-|---|---|
-| ⚡ **Zero Setup Development** | Start coding instantly, no local install needed |
-| 🤝 **Real-Time Collaboration** | Multiple users, same code, live updates |
-| 🐳 **Docker Execution Engine** | Secure sandboxed environments per user |
-| 🤖 **AI Code Assistance** | Smart suggestions & auto-completion |
-| ☁️ **Serverless Scalability** | Handles traffic spikes automatically |
-| 📂 **Cloud Storage (R2 + D1)** | Persistent, reliable file & data storage |
-| 🖥️ **Live Preview & Terminal** | Full coding experience in the browser |
+| Feature                         | Description                                       |
+| ------------------------------- | ------------------------------------------------- |
+| ⚡ **Zero Setup Development**    | Start coding instantly without local installation |
+| 🤝 **Real-Time Collaboration**  | Multiple users editing simultaneously             |
+| 🐳 **Docker Execution Engine**  | Secure sandboxed environments                     |
+| 🤖 **AI Code Assistance**       | Smart suggestions & auto-completion               |
+| ☁️ **Serverless Scalability**   | Auto-scales based on demand                       |
+| 📂 **Cloud Storage (R2 + D1)**  | Persistent storage for files & data               |
+| 🖥️ **Live Preview & Terminal** | Full IDE experience in browser                    |
 
 ---
 
@@ -46,22 +46,22 @@ User
       ├── WebSocket Server      → Real-time collaboration sync
       ├── Serverless APIs       → Business logic (Cloudflare Workers)
       ├── Docker Containers     → Isolated code execution
-      ├── Cloudflare D1         → Relational database (via Drizzle ORM)
-      └── Cloudflare R2         → File & asset storage
+      ├── Cloudflare D1         → Database (via Drizzle ORM)
+      └── Cloudflare R2         → File storage
 ```
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Category | Technologies |
-|---|---|
-| 🎨 Frontend | Next.js, React, Tailwind CSS |
-| ⚙️ Backend | Node.js, WebSockets |
-| 🐳 Execution | Docker Containers |
-| ☁️ Cloud | Cloudflare Workers, D1, R2 |
-| 🤖 AI | External AI APIs |
-| 🗄️ Database | Drizzle ORM + Cloudflare D1 |
+| Category     | Technologies                 |
+| ------------ | ---------------------------- |
+| 🎨 Frontend  | Next.js, React, Tailwind CSS |
+| ⚙️ Backend   | Node.js, WebSockets          |
+| 🐳 Execution | Docker Containers            |
+| ☁️ Cloud     | Cloudflare Workers, D1, R2   |
+| 🤖 AI        | External AI APIs             |
+| 🗄️ Database | Drizzle ORM + Cloudflare D1  |
 
 ---
 
@@ -74,36 +74,36 @@ CodeXchange/
 │   │   ├── dockerfile
 │   │   ├── nodemon.json
 │   │   ├── src/
-│   │   │   ├── inactivity.ts       # Auto-shutdown idle containers
-│   │   │   └── ratelimit.ts        # API rate limiting logic
+│   │   │   ├── inactivity.ts
+│   │   │   └── ratelimit.ts
 │   │   └── package.json
 │   ├── database/
-│   │   ├── drizzle/                # SQL migration files
+│   │   ├── drizzle/
 │   │   ├── drizzle.config.ts
 │   │   ├── vitest.config.ts
 │   │   └── wrangler.toml
 │   └── storage/
-│       ├── wrangler.toml           # Cloudflare R2 config
+│       ├── wrangler.toml
 │       └── package.json
 └── frontend/
     ├── app/
     │   ├── (app)/
-    │   │   ├── code/page.tsx       # Main IDE page
+    │   │   ├── code/page.tsx
     │   │   └── layout.tsx
     │   └── (auth)/
-    │       ├── sign-in/            # Clerk sign-in route
-    │       └── sign-up/            # Clerk sign-up route
+    │       ├── sign-in/
+    │       └── sign-up/
     ├── components/
     │   ├── editor/
-    │   │   ├── sidebar/            # File explorer sidebar
-    │   │   └── live/room.tsx       # LiveBlocks collaboration room
-    │   ├── ui/                     # Reusable UI components
-    │   └── dashboard/              # Dashboard & project cards
+    │   │   ├── sidebar/
+    │   │   └── live/room.tsx
+    │   ├── ui/
+    │   └── dashboard/
     ├── lib/
     │   ├── types.ts
     │   ├── ecs.ts
     │   └── colors.ts
-    └── middleware.ts               # Auth middleware
+    └── middleware.ts
 ```
 
 ---
@@ -112,116 +112,113 @@ CodeXchange/
 
 ### 🔧 Prerequisites
 
-- [Node.js](https://nodejs.org/) v18+
-- [Docker](https://www.docker.com/)
-- [Cloudflare Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/)
+* Node.js (v18+)
+* Docker
+* Cloudflare Wrangler CLI
+
+---
 
 ### 🚀 Setup
 
 ```bash
-# Clone the repository
 git clone https://github.com/sairamesh-7/CodeXchange.git
-
-# Navigate into the project
 cd CodeXchange
 ```
+
+---
 
 ### 📦 Install Dependencies
 
 ```bash
-# Install frontend dependencies
+# Frontend
 cd frontend
 npm install
 
-# Install backend dependencies
+# Backend
 cd ../backend/server
 npm install
 ```
 
+---
+
 ### ▶️ Run Locally
 
 ```bash
-# Start backend (in backend/server)
+# Backend
 npm run dev
 
-# Start frontend (in frontend)
+# Frontend (new terminal)
+cd frontend
 npm run dev
 ```
 
-🌐 Open your browser at: **http://localhost:3000**
+🌐 Open: **http://localhost:3000**
 
 ---
 
 ## 🔄 Workflow
 
 ```
-1. 🔐 Login          →  Authenticate via Clerk
-2. 📁 Create Project →  Choose language & template
-3. ✍️ Write Code     →  Full-featured browser editor
-4. 🤝 Collaborate    →  Invite teammates, code together live
-5. 🤖 AI Suggestions →  Get intelligent code completions
-6. 🐳 Run Code       →  Execute in isolated Docker containers
-7. ☁️ Save to Cloud  →  Persist files to Cloudflare R2
+1. 🔐 Login          → Clerk Authentication
+2. 📁 Create Project → Choose language/template
+3. ✍️ Write Code     → Browser editor
+4. 🤝 Collaborate    → Real-time multi-user editing
+5. 🤖 AI Suggestions → Smart completions
+6. 🐳 Run Code       → Docker execution
+7. ☁️ Save           → Cloudflare R2 storage
 ```
 
 ---
 
 ## 📸 Screenshots
 
-> _Add your screenshots to the `/screenshots` folder and they will appear here._
+> Add images inside `/ScreenShots` folder
 
-| System Architecture of the Cloud IDE Platform | Data Flow Diagram of Serverless Cloud IDE with Real-Time Collaboration | Code editor with live preview and terminal |
-|--------|-----------|---------------|
-| ![System Architecture of the Cloud IDE Platform](./ScreenShots/systemArch.png) | ![Data Flow Diagram of Serverless Cloud IDE with Real-Time Collaboration](./ScreenShots/Dataflow.png) | ![Code editor with live preview and terminal](./ScreenShots/editor.png) |
+| Architecture                      | Data Flow                       | Editor                        |
+| --------------------------------- | ------------------------------- | ----------------------------- |
+| ![](./ScreenShots/systemArch.png) | ![](./ScreenShots/Dataflow.png) | ![](./ScreenShots/editor.png) |
 
 ---
-✅What We Completed
-✔ User authentication and session management
-✔ Project creation and management
-✔ Browser-based code editor
-✔ Real-time collaboration (multi-user editing)
-✔ Docker-based code execution (Node.js)
-✔ Cloud storage integration
-✔ Serverless backend integration
----
-## 🚧What We Would Add With More Time
 
-- [ ] 🔄 GitHub Integration (Version Control)
-- [ ] 🌐 Multi-language Support Expansion
-- [ ] ⚡ Performance Optimization
-- [ ] 🧪 Built-in Testing Pipelines
-- [ ] 🧠 Advanced AI Model Integration
-- [ ] 📊 Better Resource Autoscaling
+## ✅ What We Completed
+
+* ✔ User authentication and session management
+* ✔ Project creation and management
+* ✔ Browser-based code editor
+* ✔ Real-time collaboration (multi-user editing)
+* ✔ Docker-based code execution
+* ✔ Cloud storage integration
+* ✔ Serverless backend
+
 ---
 
-## 👨‍💻 Authors
+## 🚧 Future Improvements
 
-<div align="center">
+* 🔄 GitHub Integration
+* 🌐 Multi-language Support
+* ⚡ Performance Optimization
+* 🧪 Built-in Testing Pipelines
+* 🧠 Advanced AI Integration
+* 📊 Better Autoscaling
 
-| Name | Role |
-|------|------|
-| **Pragada Sai Ramesh** | Developer |
+---
 
-🎓 *SRM Institute of Science and Technology*
+## 👨‍💻 Author
 
-</div>
+**Pragada Sai Ramesh**
+🎓 SRM Institute of Science and Technology
 
 ---
 
 ## 📜 License
 
-```
 MIT License © 2026 sairamesh-7
-```
-
-See [LICENSE](./LICENSE) for full details.
 
 ---
 
 <div align="center">
 
-🌍 **Built for Developers, by Developers**
-
-⭐ Star this repo if you like it &nbsp;|&nbsp; 🚀 Contributions are welcome!
+🌍 Built for Developers, by Developers
+⭐ Star this repo if you like it!
 
 </div>
