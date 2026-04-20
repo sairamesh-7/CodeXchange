@@ -120,7 +120,7 @@ CodeXchange/
 
 ```bash
 # Clone the repository
-git clone https://github.com/sairamesh-7/Serverless-Cloud-IDE.git
+git clone https://github.com/sairamesh-7/CodeXchange.git
 
 # Navigate into the project
 cd CodeXchange
@@ -172,7 +172,7 @@ npm run dev
 
 | Editor | Dashboard | Collaboration |
 |--------|-----------|---------------|
-| ![Editor](./screenshots/editor.png) | ![Dashboard](./screenshots/dashboard.png) | ![Collaboration](./screenshots/collab.png) |
+| ![Editor](./image.png) | ![Dashboard](./screenshots/dashboard.png) | ![Collaboration](./screenshots/collab.png) |
 
 ---
 
