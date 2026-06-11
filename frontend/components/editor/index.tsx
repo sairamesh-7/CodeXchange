@@ -99,10 +99,19 @@ export default function CodeEditor({
   );
   const previewPanelRef = useRef<ImperativePanelHandle>(null);
 
-  const socket = io(
-    `http://localhost:4000?userId=${userData.id}&virtualboxId=${virtualboxData.id}`
-  );
+  
+const socket = io(
+  `${
+    process.env.NEXT_PUBLIC_SOCKET_URL ||
+    "https://codexchange-backend-uvh6.onrender.com"
+  }?userId=${userData.id}&virtualboxId=${virtualboxData.id}`,
+  {
+    transports: ["websocket", "polling"],
+  }
+);
 
+
+  
   const activeTerminal = terminals.find((t) => t.id === activeTerminalId);
 
   const resizeObserver = new ResizeObserver((entries) => {
