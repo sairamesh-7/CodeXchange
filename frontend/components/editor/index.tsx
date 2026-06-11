@@ -101,13 +101,7 @@ export default function CodeEditor({
 
   
 const socket = io(
-  `${
-    process.env.NEXT_PUBLIC_SOCKET_URL ||
-    "https://codexchange-backend-uvh6.onrender.com"
-  }?userId=${userData.id}&virtualboxId=${virtualboxData.id}`,
-  {
-    transports: ["websocket", "polling"],
-  }
+  `https://codexchange-backend-uvh6.onrender.com?userId=${userData.id}&virtualboxId=${virtualboxData.id}`
 );
 
 
