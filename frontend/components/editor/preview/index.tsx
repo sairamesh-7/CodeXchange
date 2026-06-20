@@ -42,7 +42,7 @@ export default function PreviewWindow({
                 </PreviewButton> */}
                 <PreviewButton
                   onClick={() => {
-                    navigator.clipboard.writeText(`http://10.25.71.243:5173/`);
+                    navigator.clipboard.writeText(window.location.origin);
                     toast.info("Copied preview link to clipboard");
                   }}
                 >
@@ -68,7 +68,7 @@ export default function PreviewWindow({
             ref={ref}
             width={"100%"}
             height={"100%"}
-            src={`http://10.25.71.243:5173/`}
+            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/preview/${virtualboxId}`}
           />
         </div>
       )}
