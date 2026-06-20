@@ -42,7 +42,7 @@ export default function PreviewWindow({
                 </PreviewButton> */}
                 <PreviewButton
                   onClick={() => {
-                    navigator.clipboard.writeText(`http://localhost:5173`);
+                    navigator.clipboard.writeText(`http://10.25.71.243:5173/`);
                     toast.info("Copied preview link to clipboard");
                   }}
                 >
@@ -68,7 +68,7 @@ export default function PreviewWindow({
             ref={ref}
             width={"100%"}
             height={"100%"}
-            src={`http://localhost:5173`}
+            src={`http://10.25.71.243:5173/`}
           />
         </div>
       )}
